@@ -21,13 +21,13 @@ def get_orders_range(db, date_from, date_to):
     SELECT *
     FROM Orders o 
     WHERE DATE(o.OrderDate)> ? 
-    OR
-    DATE(o.OrderDate) = ?
+    AND
+    DATE(o.OrderDate) <= ?
     '''
-    db.execute(query, (date_from, date_to))
+    db.execute(query, (date_from, date_to,))
     result = db.fetchall()
-    return [result[0]]
-    
+    return result
+
 
 def get_waiting_time(db):
     # get a list with all the orders displaying each column
